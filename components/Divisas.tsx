@@ -7,6 +7,7 @@ import Inputs from "./Inputs";
 const Divisas = () => {
   const [origen, setOrigen] = useState<string>("");
   const [destino, setDestino] = useState<string>("");
+  const [cambio, setCambio] = useState<number>(0);
   const [convertir, setConvertir] = useState<number>(0);
   const [result, setResult] = useState<number>(0);
   const [error, setError] = useState<boolean>(false);
@@ -17,7 +18,15 @@ const Divisas = () => {
   const TipoCambioDestino = (texto: string) => {
     setDestino(texto);
   };
-  const TipoCambioConvert = (texto: string) => {
+  const TasaCambio = (texto: string) => {
+    const number = parseFloat(texto);
+    if (isNaN(number)) {
+      setError(true);
+    } else {
+      setError(false);
+    }
+  }
+  const MontoDinero = (texto: string) => {
     const number = parseFloat(texto);
     if (isNaN(number)) {
       setError(true);
@@ -27,23 +36,23 @@ const Divisas = () => {
     setConvertir(number);
   };
   const tipoCambio = () => {
-    if (origen === 'dolar' && destino === 'cordoba') {
-      const result = convertir * 35.7;
+    if (origen === 'USD' && destino === 'NIO' && cambio === 0.02752 ) {
+      const result = convertir * 35.70 / cambio;
       setResult(result)
     }
-    else if (origen === 'dolar' && destino === 'euro') {
+    else if (origen === 'USD' && destino === 'EUR') {
         const result = convertir * 0.80
         setResult(result)
-    } else if (origen === 'euro' && destino === 'cordoba') {
+    } else if (origen === 'EUR' && destino === 'NIO') {
         const result = convertir * 40
         setResult(result)
-    } else if (origen === 'euro' && destino === 'dolar') {
+    } else if (origen === 'EUR' && destino === 'USD') {
         const result = convertir * 1.20
         setResult(result)
-    } else if (origen === 'cordoba' && destino === 'dolar') {
+    } else if (origen === 'NIO' && destino === 'USD') {
         const result = convertir * 0.020
         setResult(result)
-    } else if (origen === 'cordoba' && destino === 'euro') {
+    } else if (origen === 'NIO' && destino === 'EUR') {
         const result = convertir * 0.025
         setResult(result)
     } else {
@@ -66,11 +75,18 @@ const Divisas = () => {
         errorMessage="Solo se admite clave de la moneda"
         onChangeText={setDestino}
       />
+      <Textos text="Tasa de Cambio" type="normal"/>
+      <Inputs
+        defaultValue={cambio.toString()}
+        errorMessage="Ingresa la tasa de Cambio de la moneda a cambiar"
+        onChangeText={TasaCambio}
+        handleError={error}
+      />
       <Textos text="Cantidad" type="normal" />
       <Inputs
         defaultValue={convertir.toString()}
         errorMessage="solo se admiten numeros"
-        onChangeText={TipoCambioConvert}
+        onChangeText={MontoDinero}
         handleError={error}
       />
 
@@ -80,7 +96,6 @@ const Divisas = () => {
         onPress={tipoCambio}
         disabled={error}
       />
-
       <Textos text="Result:" type="normal" />
       <Text style={styles.result}>{result.toString()}</Text>
     </View>
