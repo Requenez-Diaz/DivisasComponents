@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
         height: 50,
         width: 100,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     light: {
         backgroundColor: 'green'

@@ -25,7 +25,7 @@ const Divisas = () => {
     } else {
       setError(false);
     }
-  }
+  };
   const MontoDinero = (texto: string) => {
     const number = parseFloat(texto);
     if (isNaN(number)) {
@@ -36,29 +36,32 @@ const Divisas = () => {
     setConvertir(number);
   };
   const tipoCambio = () => {
-    if (origen === 'USD' && destino === 'NIO' && cambio === 0.02752 ) {
-      const result = convertir * 35.70 / cambio;
-      setResult(result)
-    }
-    else if (origen === 'USD' && destino === 'EUR') {
-        const result = convertir * 0.80
-        setResult(result)
-    } else if (origen === 'EUR' && destino === 'NIO') {
-        const result = convertir * 40
-        setResult(result)
-    } else if (origen === 'EUR' && destino === 'USD') {
-        const result = convertir * 1.20
-        setResult(result)
-    } else if (origen === 'NIO' && destino === 'USD') {
-        const result = convertir * 0.020
-        setResult(result)
-    } else if (origen === 'NIO' && destino === 'EUR') {
-        const result = convertir * 0.025
-        setResult(result)
+    if (origen === "USD" && destino === "NIO") {
+      const result = convertir * 35.8;  
+      setResult(result);
+    } else if (origen === "USD" && destino === "EUR") {
+      const result = convertir * 0.8;
+      setResult(result);
+    } else if (origen === "EUR" && destino === "NIO") {
+      const result = convertir * 35.8;
+      setResult(result);
+    } else if (origen === "EUR" && destino === "USD") {
+      const result = convertir * 0.99;
+      setResult(result);
+    } else if (origen === "NIO" && destino === "USD") {
+      const result = convertir * 0.027;
+      setResult(result);
+    } else if (origen === "NIO" && destino === "EUR") {
+      const result = convertir * 0.027;
+      setResult(result);
+    } else if (origen === "CRC" && destino === "NIO") {
+      const result = convertir * 50;
+      setResult(result);
+    } else if (origen === "NIO" && destino === "CRC") {
+      const result = convertir * 48;
+      setResult(result);
     } else {
-        alert(
-            'Error, Argumentos invalidos'
-        )
+      alert("Error, Argumentos invalidos");
     }
   };
   return (
@@ -75,7 +78,7 @@ const Divisas = () => {
         errorMessage="Solo se admite clave de la moneda"
         onChangeText={setDestino}
       />
-      <Textos text="Tasa de Cambio" type="normal"/>
+      <Textos text="Tasa de Cambio" type="normal" />
       <Inputs
         defaultValue={cambio.toString()}
         errorMessage="Ingresa la tasa de Cambio de la moneda a cambiar"
@@ -96,7 +99,6 @@ const Divisas = () => {
         onPress={tipoCambio}
         disabled={error}
       />
-      <Textos text="Result:" type="normal" />
       <Text style={styles.result}>{result.toString()}</Text>
     </View>
   );
@@ -107,12 +109,14 @@ export default Divisas;
 const styles = StyleSheet.create({
   result: {
     fontSize: 40,
-    color: "lightslategrey",
+    color: "green",
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 5,
+    textAlign: "center"
   },
   container: {
-    flex: 1,
+    flex: 2,
     justifyContent: "center",
     alignItems: "center",
   },

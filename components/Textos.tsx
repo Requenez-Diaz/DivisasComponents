@@ -39,6 +39,6 @@ const styles = StyleSheet.create({
     },
     normal: {
         color: 'Skyblue',
-        padding: 5
+        padding: 2
     }
 })
