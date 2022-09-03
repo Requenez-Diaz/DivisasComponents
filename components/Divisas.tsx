@@ -18,14 +18,9 @@ const Divisas = () => {
   const TipoCambioDestino = (texto: string) => {
     setDestino(texto);
   };
-  const TasaCambio = (texto: string) => {
-    const number = parseFloat(texto);
-    if (isNaN(number)) {
-      setError(true);
-    } else {
-      setError(false);
-    }
-  };
+  const TasaCambio = (numero: number) => {
+    setCambio(numero);
+  }
   const MontoDinero = (texto: string) => {
     const number = parseFloat(texto);
     if (isNaN(number)) {
@@ -37,28 +32,28 @@ const Divisas = () => {
   };
   const tipoCambio = () => {
     if (origen === "USD" && destino === "NIO") {
-      const result = convertir * 35.8;  
+      const result = convertir * cambio;  
       setResult(result);
     } else if (origen === "USD" && destino === "EUR") {
-      const result = convertir * 0.8;
+      const result = convertir * cambio
       setResult(result);
     } else if (origen === "EUR" && destino === "NIO") {
-      const result = convertir * 35.8;
+      const result = convertir * cambio
       setResult(result);
     } else if (origen === "EUR" && destino === "USD") {
-      const result = convertir * 0.99;
+      const result = convertir * cambio
       setResult(result);
     } else if (origen === "NIO" && destino === "USD") {
-      const result = convertir * 0.027;
+      const result = convertir * cambio
       setResult(result);
     } else if (origen === "NIO" && destino === "EUR") {
-      const result = convertir * 0.027;
+      const result = convertir * cambio
       setResult(result);
     } else if (origen === "CRC" && destino === "NIO") {
-      const result = convertir * 50;
+      const result = convertir * cambio
       setResult(result);
     } else if (origen === "NIO" && destino === "CRC") {
-      const result = convertir * 48;
+      const result = convertir * cambio
       setResult(result);
     } else {
       alert("Error, Argumentos invalidos");
